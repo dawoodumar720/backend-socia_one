@@ -7,12 +7,12 @@ async function connectDb() {
 
   try {
     // Connect to MongoDB
-    await mongoose.connect(host);
-
+    const connectionInstance = await mongoose.connect(host);
     winston.info("Connected to MongoDB");
-    winston.info(`Host: ${host}`);
+    winston.info(`${connectionInstance.connection.host}: ${host}`);
   } catch (err) {
     winston.error(`Error: ${err}`);
+    process.exit(1);
   }
 }
 
